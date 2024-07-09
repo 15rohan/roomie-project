@@ -15,7 +15,7 @@ const Home = () => {
         college: yup.string().required('Required'),
         age: yup.number().required('Required'),
         password: yup.string().required('Required'),
-        gender:yup.string().required('Required')
+        gender: yup.string().required('Required')
     })
 
     const registerUser = async (data) => {
@@ -26,7 +26,7 @@ const Home = () => {
                 email: data.email,
                 age: data.age,
                 password: data.password,
-                gender:data.gender
+                gender: data.gender
             }
             const result = await axiosInstance.post('api/v1/auth/register', user)
             console.log(result, 'result')
@@ -42,7 +42,7 @@ const Home = () => {
             college: '',
             age: '',
             password: '',
-            gender:''
+            gender: ''
         },
         validationSchema: schema,
         onSubmit: (values) => {
@@ -65,7 +65,7 @@ const Home = () => {
                         <input type="password" name='password' value={values.password} onChange={handleChange} placeholder='Set Your Password' />
                         <div className='flex gap-2'>
                             <input type="number" className='flex-1' name="age" id="age" value={values.age} onChange={handleChange} placeholder='Enter Your Age' />
-                            <select  className='flex-1' name="college" id="college" value={values.college} onChange={handleChange} >
+                            <select required className='flex-1' name="college" id="college" value={values.college} onChange={handleChange} >
                                 <option value="" selected={true} disabled>Select Your College</option>
                                 <option value="VIT">VIT</option>
                                 <option value="SRM">SRM</option>
@@ -74,17 +74,17 @@ const Home = () => {
                         </div>
                         <div className='flex flex-col gap-1 text-white'>
                             <div className='flex items-center gap-2'>
-                                <input type="radio" className='w-3 h-3' name="gender" value='Male' id="male" onChange={handleChange}/>
+                                <input type="radio" className='w-3 h-3' name="gender" value='Male' id="male" onChange={handleChange} />
                                 <label htmlFor="male">Male</label>
                             </div>
                             <div className='flex items-center gap-2'>
-                                <input type="radio" className='w-3 h-3' name="gender" value='Female' id="female" onChange={handleChange}/>
+                                <input type="radio" className='w-3 h-3' name="gender" value='Female' id="female" onChange={handleChange} />
                                 <label htmlFor="female">Female</label>
                             </div>
                         </div>
                         <div className="submit">
                             <button type='submit'>Submit</button>
-                            <button className='button-clear' onClick={resetForm}>Clear</button>
+                            <div className='button-clear' onClick={resetForm}>Clear</div>
                         </div>
                     </div>
                 </form>
