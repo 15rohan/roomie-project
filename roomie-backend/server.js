@@ -13,7 +13,7 @@ app.use(express.json())
 //routes
 app.use('/api/v1/auth',authRouter)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 
 const start = async () =>{
     try {
@@ -24,4 +24,4 @@ const start = async () =>{
     }
 }
 
-start()
+start();
