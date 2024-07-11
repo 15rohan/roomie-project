@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import RegisterOverlay from '../components/RegisterOverlay'
+import Navbar from '../components/Navbar'
+import { axiosInstance } from '../service/axios'
 
 const Home = () => {
 
@@ -11,17 +13,23 @@ const Home = () => {
         setPopup((prev)=>!prev)
     }
 
+    const getUsers=async()=>{
+        try {
+            const result= await axiosInstance.get('api/v1/users')
+            console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    React.useEffect(()=>{
+getUsers()
+    },[])
+
     return (
         <div className="relative h-screen">
             {popup && <RegisterOverlay togglePopup={togglePopup}/>}
-            <nav className='w-full h-14 bg-blue-500 flex items-center justify-between text-white px-5'>
-                <div><p className='text-2xl font-bold cursor-pointer'>Roomie</p></div>
-                <div className='flex gap-6 items-center justify-center'>
-                <li className='list-none cursor-pointer hover:text-slate-200 text-md'>Home</li>
-               <Link to='/login'><li className='list-none cursor-pointer hover:text-slate-200 text-md'>Login</li></Link>
-                <li className='list-none cursor-pointer hover:text-slate-200 text-md' onClick={()=>togglePopup()}>Register</li>
-                </div>
-            </nav>
+           <Navbar togglePopup={togglePopup}/>
         </div>
     )
 }

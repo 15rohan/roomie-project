@@ -3,9 +3,11 @@ import { useFormik } from "formik";
 import * as yup from 'yup'
 import { axiosInstance } from '../service/axios'
 import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const Login = () => {
-    const navigate=useNavigate()
+    const navigate = useNavigate()
 
     const schema = yup.object().shape({
         email: yup.string().email('Invalid email').required('Required'),
@@ -14,13 +16,14 @@ const Login = () => {
 
     const login = async () => {
         try {
-          const  user = {
+            const user = {
                 email: values.email,
                 password: values.password
             }
             const result = await axiosInstance.post('api/v1/auth/login', user)
             console.log(result)
-            if(result.statusText==='OK'){
+            if (result.statusText === 'OK') {
+                localStorage.setItem('token',result.data.token)
                 navigate('/')
             }
         } catch (error) {
@@ -34,25 +37,29 @@ const Login = () => {
             password: '',
         },
         validationSchema: schema,
-        onSubmit: (values) => {
+        onSubmit: () => {
             login()
         }
     })
 
-    console.log(values)
+    console.log(errors)
 
     return (
-        <div className='flex items-center justify-center h-screen'>
-            <div className='w-2/5 bg-[#2B2BD7] px-5 py-10'>
-                <form className='flex flex-col gap-5' onSubmit={handleSubmit}>
+        <div className='flex flex-col flex-1'>
+            {/* <Navbar/> */}
+            <div className='flex items-center justify-center h-[90vh]'>
+                <div className='flex flex-col justify-between w-2/5 h-3/5 bg-[#2B2BD7] px-5 py-10'>
                     <h1 className='text-center text-white text-3xl font-semibold'>Login</h1>
-                    <input type="text" name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
-                    <input type="password" name='password' value={values.password} onChange={handleChange} placeholder='Enter Your Password' />
-                    <div className="submit">
+                    <form className='flex flex-col gap-5 items-center justify-center' onSubmit={handleSubmit}>
+                        <input type="text" className='w-4/5' name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
+                        <input type="password" className='w-4/5' name='password' value={values.password} onChange={handleChange} placeholder='Enter Your Password' />
+                        <div className="submit">
                         <button type='submit'>Submit</button>
                         <div className='button-clear bg-[#8DD1E7]' onClick={resetForm}>Clear</div>
                     </div>
-                </form>
+                    </form>
+                    <p className='text-white text-center'>Don't have an account? Click <Link to='/' className='text-green-500'>here</Link> to create one.</p>
+                </div>
             </div>
         </div>
     )
