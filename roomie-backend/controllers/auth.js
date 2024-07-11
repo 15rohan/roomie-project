@@ -30,4 +30,8 @@ const login = async (req, res) => {
     res.status(200).json({ user: { name: user.name }, token })
 }
 
-module.exports = { register, login }
+const logout = async (req,res) => {
+    res.status(200).send('Logged Out')
+}
+
+module.exports = { register, login, logout }

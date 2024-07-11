@@ -11,9 +11,11 @@ const express = require('express')
 const app = express()
 
 const connectDB = require('./db/connect')
+const authMiddleware = require('./middleware/authentication')
 
 //routers
 const authRouter = require('./routes/auth');
+const usersRouter = require('./routes/users')
 
 //error handlers
 const notFoundMiddleware = require('./middleware/not-found')
@@ -34,7 +36,7 @@ app.use(xss())
 
 //routes
 app.use('/api/v1/auth',authRouter)
-
+app.use('/api/v1/users', authMiddleware, usersRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
