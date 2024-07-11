@@ -1,27 +1,42 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import RegisterOverlay from '../components/RegisterOverlay'
+import Navbar from '../components/Navbar'
+import { axiosInstance } from '../service/axios'
 
 const Home = () => {
 
     const [popup, setPopup] = React.useState(false)
     // console.log(popup)
 
-    const togglePopup=()=>{
-        setPopup((prev)=>!prev)
+    const togglePopup = () => {
+        setPopup((prev) => !prev)
     }
+
+    const getUsers = async () => {
+        try {
+            const result = await axiosInstance.get('api/v1/users')
+            console.log(result)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    React.useEffect(() => {
+        getUsers()
+    }, [])
 
     return (
         <div className="relative h-screen">
-            {popup && <RegisterOverlay togglePopup={togglePopup}/>}
-            <nav className='w-full h-14 bg-blue-500 flex items-center justify-between text-white px-5'>
-                <div><p className='text-2xl font-bold cursor-pointer'>Roomie</p></div>
-                <div className='flex gap-6 items-center justify-center'>
-                <li className='list-none cursor-pointer hover:text-slate-200 text-md'>Home</li>
-               <Link to='/login'><li className='list-none cursor-pointer hover:text-slate-200 text-md'>Login</li></Link>
-                <li className='list-none cursor-pointer hover:text-slate-200 text-md' onClick={()=>togglePopup()}>Register</li>
+            {popup && <RegisterOverlay togglePopup={togglePopup} />}
+            <Navbar togglePopup={togglePopup} />
+            <div className='flex flex-col items-center justify-center'>
+                <div className='flex flex-col w-2/5 justify-center gap-5 my-36'>
+                    <p className='text-5xl font-bold'>In College?<br />Looking for Roomates?</p>
+                    <p>Register on Roomie today and find out other students like you looking for roomates who arent weirdos</p>
                 </div>
-            </nav>
+            </div>
+
         </div>
     )
 }

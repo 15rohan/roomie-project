@@ -37,10 +37,16 @@ const RegisterOverlay = (props) => {
             const result = await axiosInstance.post('api/v1/auth/register', user)
             console.log(result, 'result')
                 setStatus('Registration Successful!')
+                resetForm()
             
         } catch (error) {
             console.log(error)
-            setStatus('Could not register,please try again')
+            if(error.response.data.msg){
+                setStatus(error.response.data.msg)
+            }
+            else{
+                setStatus('Could not register,please try again')
+            }
         }
     }
 
@@ -55,8 +61,9 @@ const RegisterOverlay = (props) => {
         },
         validationSchema: schema,
         onSubmit: (values) => {
+            setStatus('')
             registerUser(values)
-            resetForm()
+            // resetForm()
             setChecked({
                 male:false,
                 female:false
@@ -68,7 +75,7 @@ const RegisterOverlay = (props) => {
 
     return (
         <div className="home w-full absolute z-10 bg-black bg-opacity-40 h-full">
-            <div className="registration bg-[#2B2BD7]">
+            <div className="registration bg-blue-500">
                 <div className="text-3xl text-white font-semibold text-center">
                     <h1>Register Here!</h1>
                 </div>
