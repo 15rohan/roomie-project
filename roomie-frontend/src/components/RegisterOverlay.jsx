@@ -75,7 +75,7 @@ const RegisterOverlay = (props) => {
 
     return (
         <div className="home w-full absolute z-10 bg-black bg-opacity-40 h-full">
-            <div className="registration bg-[#2B2BD7]">
+            <div className="registration bg-blue-500">
                 <div className="text-3xl text-white font-semibold text-center">
                     <h1>Register Here!</h1>
                 </div>

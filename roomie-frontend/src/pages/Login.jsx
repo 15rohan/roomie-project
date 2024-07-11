@@ -45,20 +45,20 @@ const Login = () => {
     console.log(errors)
 
     return (
-        <div className='flex flex-col flex-1'>
+        <div className='flex flex-col min-h-screen bg-blue-500'>
             {/* <Navbar/> */}
             <div className='flex items-center justify-center h-[90vh]'>
-                <div className='flex flex-col justify-between w-2/5 h-3/5 bg-[#2B2BD7] px-5 py-10'>
-                    <h1 className='text-center text-white text-3xl font-semibold'>Login</h1>
-                    <form className='flex flex-col gap-5 items-center justify-center' onSubmit={handleSubmit}>
-                        <input type="text" className='w-4/5' name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
-                        <input type="password" className='w-4/5' name='password' value={values.password} onChange={handleChange} placeholder='Enter Your Password' />
+                <div className='flex flex-col justify-between w-2/5 h-3/5 bg-white px-5 py-10 rounded-xl'>
+                    <h1 className='text-center text-3xl font-semibold'>Login</h1>
+                    <form className='flex flex-col gap-8 items-center justify-center' onSubmit={handleSubmit}>
+                        <input type="text" className='w-4/5 rounded-sm bg-slate-200' name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
+                        <input type="password" className='w-4/5 rounded-sm bg-slate-200' name='password' value={values.password} onChange={handleChange} placeholder='Enter Your Password' />
                         <div className="submit">
                         <button type='submit'>Submit</button>
                         <div className='button-clear bg-[#8DD1E7]' onClick={resetForm}>Clear</div>
                     </div>
                     </form>
-                    <p className='text-white text-center'>Don't have an account? Click <Link to='/' className='text-green-500'>here</Link> to create one.</p>
+                    <p className='text-center'>Don't have an account? Click <Link to='/' className='text-green-500'>here</Link> to create one or go back</p>
                 </div>
             </div>
         </div>
