@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import RegisterOverlay from '../components/RegisterOverlay'
 
 const Home = () => {
@@ -17,7 +18,7 @@ const Home = () => {
                 <div><p className='text-2xl font-bold cursor-pointer'>Roomie</p></div>
                 <div className='flex gap-6 items-center justify-center'>
                 <li className='list-none cursor-pointer hover:text-slate-200 text-md'>Home</li>
-                <li className='list-none cursor-pointer hover:text-slate-200 text-md'>Login</li>
+               <Link to='/login'><li className='list-none cursor-pointer hover:text-slate-200 text-md'>Login</li></Link>
                 <li className='list-none cursor-pointer hover:text-slate-200 text-md' onClick={()=>togglePopup()}>Register</li>
                 </div>
             </nav>

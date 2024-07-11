@@ -2,9 +2,10 @@ import React from 'react'
 import { useFormik } from "formik";
 import * as yup from 'yup'
 import { axiosInstance } from '../service/axios'
+import { useNavigate } from 'react-router';
 
 const Login = () => {
-
+    const navigate=useNavigate()
 
     const schema = yup.object().shape({
         email: yup.string().email('Invalid email').required('Required'),
@@ -19,6 +20,9 @@ const Login = () => {
             }
             const result = await axiosInstance.post('api/v1/auth/login', user)
             console.log(result)
+            if(result.statusText==='OK'){
+                navigate('/')
+            }
         } catch (error) {
             console.log(error)
         }
@@ -34,8 +38,6 @@ const Login = () => {
             login()
         }
     })
-
-
 
     console.log(values)
 
