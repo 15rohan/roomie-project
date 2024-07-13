@@ -33,8 +33,8 @@ const login = async (req, res) => {
     res.status(200).json({ user: { name: user.name }, token })
 }
 
-const logout = async (req,res) => {
-    res.status(200).send('Logged Out')
+const verifyToken = async (req,res) =>{
+    res.status(200).json({ msg: 'Token is valid'})
 }
 
-module.exports = { register, login, logout }
+module.exports = { register, login, verifyToken}
