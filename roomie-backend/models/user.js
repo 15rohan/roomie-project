@@ -35,17 +35,21 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide college name'],
         enum: ['VIT', 'SRM', 'BITS']
+    },
+    preferences: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Preference'
     }
-})
+}, { timestamps: true })
 
-UserSchema.pre('save', async function(next){
+UserSchema.pre('save', async function (next) {
     const salt = await bcrypt.genSalt(12)
-    this.password = await bcrypt.hash(this.password,salt)
+    this.password = await bcrypt.hash(this.password, salt)
     next()
 })
 
-UserSchema.methods.comparePassword = async function(candidatePassword){
-    const isMatch = await bcrypt.compare(candidatePassword,this.password)
+UserSchema.methods.comparePassword = async function (candidatePassword) {
+    const isMatch = await bcrypt.compare(candidatePassword, this.password)
     return isMatch
 }
 

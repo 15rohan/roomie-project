@@ -11,11 +11,9 @@ const express = require('express')
 const app = express()
 
 const connectDB = require('./db/connect')
-const authMiddleware = require('./middleware/authentication')
 
 //routers
-const authRouter = require('./routes/auth');
-const usersRouter = require('./routes/users')
+const authRouter = require('./routes/auth')
 
 //error handlers
 const notFoundMiddleware = require('./middleware/not-found')
@@ -33,10 +31,8 @@ app.use(helmet())
 app.use(cors())
 app.use(xss())
 
-
 //routes
 app.use('/api/v1/auth',authRouter)
-app.use('/api/v1/users', authMiddleware, usersRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)
