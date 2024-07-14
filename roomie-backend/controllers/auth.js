@@ -1,14 +1,25 @@
 const User = require('../models/user')
+const Preference = require('../models/preference')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
-    if(req.body.password.length < 8){
+    const { password, preferences } = req.body
+
+    if (password.length < 8) {
         throw new BadRequestError('Password must be atleast 8 characters')
     }
+
+    let preferenceDoc = await Preference.findOne(preferences)
+    if(!preferenceDoc){
+        preferenceDoc = await Preference.create(preferences)
+    }
+    req.body.preferences = preferenceDoc._id;
+
     const user = await User.create({ ...req.body })
     const token = user.createJWT()
+    
     res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
 }
 
@@ -33,8 +44,8 @@ const login = async (req, res) => {
     res.status(200).json({ user: { name: user.name }, token })
 }
 
-const verifyToken = async (req,res) =>{
-    res.status(200).json({ msg: 'Token is valid'})
+const verifyToken = async (req, res) => {
+    res.status(200).json({ msg: 'Token is valid' })
 }
 
-module.exports = { register, login, verifyToken}
+module.exports = { register, login, verifyToken }
