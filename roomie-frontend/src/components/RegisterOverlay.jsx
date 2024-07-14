@@ -1,6 +1,7 @@
 import React from 'react'
 import { useFormik } from "formik";
 import * as yup from 'yup'
+import { Link } from 'react-router-dom';
 import { axiosInstance } from '../service/axios'
 
 const RegisterOverlay = (props) => {
@@ -74,26 +75,26 @@ const RegisterOverlay = (props) => {
     console.log(values)
 
     return (
-        <div className="home w-full absolute z-10 bg-black bg-opacity-40 h-full">
-            <div className="registration bg-blue-500">
-                <div className="text-3xl text-white font-semibold text-center">
+        <div className="home flex justify-center items-center w-full h-full">
+            <div className="registration bg-white bg-opacity-80 rounded-xl">
+                <div className="text-3xl font-semibold text-center">
                     <h1>Register Here!</h1>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <div className="form">
-                        <input type="text" name='name' value={values.name} onChange={handleChange} placeholder='Enter Your Name' />
-                        <input type="text" name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
-                        <input type="password" name='password' value={values.password} onChange={handleChange} placeholder='Set Your Password' />
+                        <input type="text" className='bg-slate-200' name='name' value={values.name} onChange={handleChange} placeholder='Enter Your Name' />
+                        <input type="text" className='bg-slate-200' name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
+                        <input type="password" className='bg-slate-200' name='password' value={values.password} onChange={handleChange} placeholder='Set Your Password' />
                         <div className='flex gap-2'>
-                            <input type="number" className='flex-1' name="age" id="age" value={values.age} onChange={handleChange} placeholder='Enter Your Age' />
-                            <select required className='flex-1' name="college" id="college" value={values.college} onChange={handleChange} >
+                            <input type="number"  className='flex-1 bg-slate-200' name="age" id="age" value={values.age} onChange={handleChange} placeholder='Enter Your Age' />
+                            <select required className='flex-1 bg-slate-200' name="college" id="college" value={values.college} onChange={handleChange} >
                                 <option value="" selected={true} disabled>Select Your College</option>
                                 <option value="VIT">VIT</option>
                                 <option value="SRM">SRM</option>
                                 <option value="BITS">BITS</option>
                             </select>
                         </div>
-                        <div className='flex flex-col gap-1 text-white'>
+                        <div className='flex flex-col gap-1'>
                             <div className='flex items-center gap-2'>
                                 <input type="radio" className='w-3 h-3' name="gender" value='Male' id="male" onChange={handleChange} />
                                 <label htmlFor="male">Male</label>
@@ -107,12 +108,12 @@ const RegisterOverlay = (props) => {
                         <div className="submit">
                             <button type='submit'>Submit</button>
                             <div className='button-clear bg-[#8DD1E7]' onClick={resetForm}>Clear</div>
-                            <div className='button-clear bg-white' onClick={()=>props.togglePopup()}>Close</div>
                         </div>
                     </div>
                 </form>
+                <p className='text-center'>Already have an account? Click <span onClick={()=>props.toggleSignUp()} className='text-green-500 cursor-pointer hover:text-green-400'>here</span> to log in</p>
             </div>
-        </div>
+         </div>
     )
 }
 
