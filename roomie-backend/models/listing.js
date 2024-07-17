@@ -16,7 +16,7 @@ const ListingSchema = new mongoose.Schema({
     },
     college:{
         type: String,
-        enum: ['VIT','SRM','BITS'],
+        enum: ['VIT Chennai','VIT Bhopal','VIT Vellore', 'VIT AP'],
         required: [true,'Please provide your college']
     },
     createdBy: {
