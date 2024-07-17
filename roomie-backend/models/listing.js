@@ -5,6 +5,11 @@ const ListingSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide room details']
     },
+    contact: {
+        type: String,
+        required: [true, 'Please provide contact number'],
+        match: [/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/, 'Please provide a valid contact number']
+    },
     description: {
         type: String,
         required: [true, 'Please provide a description']
@@ -13,10 +18,6 @@ const ListingSchema = new mongoose.Schema({
         type: String,
         enum: ['VIT','SRM','BITS'],
         required: [true,'Please provide your college']
-    },
-    location: {
-        type: String,
-        required: [true, 'Please provide location']
     },
     createdBy: {
         type: mongoose.Types.ObjectId,
