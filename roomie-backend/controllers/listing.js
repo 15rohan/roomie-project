@@ -9,13 +9,21 @@ const getAllListings = async (req,res) =>{
 }
 
 const createListing = async (req,res) =>{
-    req.body.createdBy = req.user.userID
+    const createdBy = req.user.userID
 
-    let listing = await Listing.findOne({createdBy: req.body.createdBy})
+    let listing = await Listing.findOne({createdBy})
     if(listing){
         throw new BadRequestError('User already has an existing listing')
     }
 
+    const user = await User.findOne({_id: createdBy})
+    if(!user){
+        throw new BadRequestError('User not found')
+    }
+
+    req.body.createdBy = createdBy;
+    req.body.college_name = user.college_name
+    req.body.gender = user.gender
     listing = await Listing.create(req.body)
     res.status(StatusCodes.CREATED).json({listing})
 }
