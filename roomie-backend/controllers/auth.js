@@ -41,7 +41,7 @@ const login = async (req, res) => {
         throw new UnauthenticatedError('Invalid Password')
     }
     const token = user.createJWT()
-    res.status(200).json({ user: { name: user.name }, token })
+    res.status(200).json({ user: { name: user.name, college_name: user.college_name }, token })
 }
 
 const verifyToken = async (req, res) => {
