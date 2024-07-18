@@ -80,7 +80,7 @@ const Preferences = () => {
 
     return (
         <div className='flex flex-col gap-32 min-h-screen bg-orange-200 justify-center'>
-            <p className='text-3xl font-semibold text-center'>How would you like your roomate to be?</p>
+            <p className='text-3xl font-semibold text-center'>What are you preferences?</p>
             <div className='flex items-center justify-center'>
                 <div className='flex gap-5 items-center justify-center'>
                     {options}

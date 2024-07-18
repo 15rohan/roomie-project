@@ -65,9 +65,10 @@ const navigate= useNavigate()
                             <input type="number"  className='flex-1 bg-slate-200' name="age" id="age" value={values.age} onChange={handleChange} placeholder='Enter Your Age' />
                             <select required className='flex-1 bg-slate-200' name="college" id="college" value={values.college} onChange={handleChange} >
                                 <option value="" selected={true} disabled>Select Your College</option>
-                                <option value="VIT">VIT</option>
-                                <option value="SRM">SRM</option>
-                                <option value="BITS">BITS</option>
+                                <option value="VIT Chennai">VIT-Chennai</option>
+                                <option value="VIT Bhopal">VIT-Bhopal</option>
+                                <option value="VIT Vellore">VIT-Vellore</option>
+                                <option value="VIT AP">VIT-AP</option>
                             </select>
                         </div>
                         <div className='flex flex-col gap-1'>
