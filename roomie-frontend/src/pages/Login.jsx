@@ -50,7 +50,7 @@ const Login = () => {
         setSignUp((prev) => !prev)
     }
 
-    console.log(signUp)
+    // console.log(signUp)
 
     return (
         <div className='bg-cover bg-no-repeat' style={{backgroundImage:`url(${hostel})`}}>

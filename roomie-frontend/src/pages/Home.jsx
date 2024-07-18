@@ -6,32 +6,11 @@ import hostel from '../images/hostel.jpg'
 import { axiosInstance } from '../service/axios'
 
 const Home = () => {
-
-    const [popup, setPopup] = React.useState(false)
-    // console.log(popup)
-
-    const togglePopup = () => {
-        setPopup((prev) => !prev)
-    }
-
-    const getUsers = async () => {
-        try {
-            const result = await axiosInstance.get('api/v1/users')
-            console.log(result)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    React.useEffect(() => {
-        getUsers()
-    }, [])
-
+    
     return (
         <div className="relative h-screen">
-            {popup && <RegisterOverlay togglePopup={togglePopup} />}
             <div className='flex flex-col items-center bg-no-repeat bg-cover min-h-screen' style={{ backgroundImage: `url(${hostel})` }}>
-                <Navbar togglePopup={togglePopup} />
+                <Navbar />
                 <div className='flex flex-col w-3/5 justify-between gap-10 my-36 text-white'>
                     <div className='flex flex-col gap-5'>
                         <p className='text-6xl font-bold'>In College?<br />Looking for Roomates?</p>

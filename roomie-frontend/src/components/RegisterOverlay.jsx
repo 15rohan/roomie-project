@@ -1,11 +1,11 @@
 import React from 'react'
 import { useFormik } from "formik";
 import * as yup from 'yup'
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../service/axios'
 
 const RegisterOverlay = (props) => {
-
+const navigate= useNavigate()
     const [checked,setChecked]=React.useState({
         male:false,
         female:false
@@ -25,31 +25,6 @@ const RegisterOverlay = (props) => {
         gender: yup.string().required('Required')
     })
 
-    const registerUser = async (data) => {
-        try {
-            const user = {
-                name: data.name,
-                college_name: data.college,
-                email: data.email,
-                age: data.age,
-                password: data.password,
-                gender: data.gender
-            }
-            const result = await axiosInstance.post('api/v1/auth/register', user)
-            console.log(result, 'result')
-                setStatus('Registration Successful!')
-                resetForm()
-            
-        } catch (error) {
-            console.log(error)
-            if(error.response.data.msg){
-                setStatus(error.response.data.msg)
-            }
-            else{
-                setStatus('Could not register,please try again')
-            }
-        }
-    }
 
     const { values, handleChange, handleSubmit, touched, errors, resetForm } = useFormik({
         initialValues: {
@@ -63,16 +38,17 @@ const RegisterOverlay = (props) => {
         validationSchema: schema,
         onSubmit: (values) => {
             setStatus('')
-            registerUser(values)
+            // registerUser(values)
             // resetForm()
-            setChecked({
-                male:false,
-                female:false
-            })
+            // setChecked({
+            //     male:false,
+            //     female:false
+            // })
+            navigate('/preferences',{state:values})
         }
     })
 
-    console.log(values)
+    // console.log(values)
 
     return (
         <div className="home flex justify-center items-center w-full h-full">
@@ -106,7 +82,7 @@ const RegisterOverlay = (props) => {
                         </div>
                     {status && <p className='text-red-500 text-lg font-semibold'>{status}</p>}
                         <div className="submit">
-                            <button type='submit'>Submit</button>
+                            <button type='submit'>Next</button>
                             <div className='button-clear bg-[#8DD1E7]' onClick={resetForm}>Clear</div>
                         </div>
                     </div>
