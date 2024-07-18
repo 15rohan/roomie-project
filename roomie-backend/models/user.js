@@ -34,7 +34,7 @@ const UserSchema = new mongoose.Schema({
     college_name: {
         type: String,
         required: [true, 'Please provide college name'],
-        enum: ['VIT', 'SRM', 'BITS']
+        enum: ['VIT Chennai', 'VIT Bhopal', 'VIT Vellore', 'VIT AP']
     },
     preferences: {
         type: mongoose.Types.ObjectId,
