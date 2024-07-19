@@ -4,7 +4,8 @@ const { BadRequestError } = require('../errors')
 const {StatusCodes} = require('http-status-codes')
 
 const getAllListings = async (req,res) =>{
-    const listings = await Listing.find({college: req.body.college}).sort('createdAt')
+    console.log(req.query)
+    const listings = await Listing.find(req.query).sort('createdAt')
     res.status(StatusCodes.OK).json({listings, count:listings.length})
 }
 
@@ -21,8 +22,8 @@ const createListing = async (req,res) =>{
         throw new BadRequestError('User not found')
     }
 
-    req.body.createdBy = createdBy;
-    req.body.college_name = user.college_name
+    req.body.createdBy = createdBy
+    req.body.college = user.college_name
     req.body.gender = user.gender
     listing = await Listing.create(req.body)
     res.status(StatusCodes.CREATED).json({listing})
