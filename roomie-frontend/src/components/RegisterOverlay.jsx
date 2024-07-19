@@ -51,7 +51,7 @@ const navigate= useNavigate()
     // console.log(values)
 
     return (
-        <div className="home flex justify-center items-center w-full h-full">
+        <div className="home flex justify-center items-center w-full h-full ">
             <div className="registration bg-white bg-opacity-80 rounded-xl">
                 <div className="text-3xl font-semibold text-center">
                     <h1>Register Here!</h1>

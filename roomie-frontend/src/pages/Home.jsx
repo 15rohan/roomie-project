@@ -1,12 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import RegisterOverlay from '../components/RegisterOverlay'
+// import RegisterOverlay from '../components/RegisterOverlay'
 import Navbar from '../components/Navbar'
 import hostel from '../images/hostel.jpg'
-import { axiosInstance } from '../service/axios'
+import Auth from '../components/Auth.js'
+// import { axiosInstance } from '../service/axios'
 
-const Home = () => {
-    
+const Home = (props) => {
+
+
+    console.log(props.isLogin)
+
     return (
         <div className="relative h-screen">
             <div className='flex flex-col items-center bg-no-repeat bg-cover min-h-screen' style={{ backgroundImage: `url(${hostel})` }}>
@@ -16,7 +20,7 @@ const Home = () => {
                         <p className='text-6xl font-bold'>In College?<br />Looking for Roomates?</p>
                         <p className='text-2xl'>Register on Roomie today and find out other students like you looking for roomates who arent weirdos</p>
                     </div>
-                    <div className='text-white bg-black text-center w-fit py-2 px-4 rounded-full text-md font-semibold cursor-pointer bg-opacity-40 hover:bg-opacity-100'>Get Started</div>
+                  <Link to={`${props.isLogin ? '/listings':'/login'}`}><div className='text-white bg-black text-center w-fit py-2 px-4 rounded-full text-md font-semibold cursor-pointer bg-opacity-40 hover:bg-opacity-100'>Get Started</div></Link>
                 </div>
             </div>
 

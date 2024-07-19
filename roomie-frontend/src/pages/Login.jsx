@@ -53,16 +53,18 @@ const Login = () => {
     // console.log(signUp)
 
     return (
-        <div className='bg-cover bg-no-repeat' style={{backgroundImage:`url(${hostel})`}}>
+        <div className='bg-cover bg-no-repeat min-h-screen' style={{ backgroundImage: `url(${hostel})` }}>
             <Navbar />
-            <div className='flex flex-col min-h-screen justify-center'>
-                {!signUp ?
-                    <LoginComponent toggleSignUp={toggleSignUp} />
-                    :
-                    <RegisterOverlay toggleSignUp={toggleSignUp} />
-                }
+            <div className='flex flex-col justify-center min-h-[90vh]' >
+                {/* <div className='flex justify-center items-center'> */}
+                    {!signUp ?
+                        <LoginComponent toggleSignUp={toggleSignUp} />
+                        :
+                        <RegisterOverlay toggleSignUp={toggleSignUp} />
+                    }
+                </div>
             </div>
-        </div>
+        // </div>
     )
 }
 

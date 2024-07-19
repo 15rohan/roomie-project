@@ -55,7 +55,7 @@ const LoginComponent = (props) => {
                     </form>
                     <p className='text-center'>Don't have an account? Click <span onClick={()=>props.toggleSignUp()} className='text-green-500 cursor-pointer hover:text-green-400'>here</span> to sign up</p>
                 </div>
-            </div> 
+             </div>  
     )
 }
 
