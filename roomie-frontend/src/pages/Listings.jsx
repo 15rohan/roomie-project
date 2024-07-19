@@ -5,7 +5,10 @@ const Listings = () => {
 
     const getListings = async () => {
         try {
-            const result = await axiosInstance.get('api/v1/listings',{college:'VIT Chennai'})
+            const body = {
+                college: 'VIT Chennai'
+            }
+            const result = await axiosInstance.get('api/v1/listings', body)
             console.log(result)
         } catch (error) {
             console.log(error)
