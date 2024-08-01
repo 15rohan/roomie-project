@@ -2,6 +2,7 @@ const User = require('../models/user')
 const Preference = require('../models/preference')
 const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, UnauthenticatedError } = require('../errors')
+const { addToBlacklist } = require('../utils/blacklist')
 const jwt = require('jsonwebtoken')
 
 const register = async (req, res) => {
@@ -12,14 +13,14 @@ const register = async (req, res) => {
     }
 
     let preferenceDoc = await Preference.findOne(preferences)
-    if(!preferenceDoc){
+    if (!preferenceDoc) {
         preferenceDoc = await Preference.create(preferences)
     }
     req.body.preferences = preferenceDoc._id;
 
     const user = await User.create({ ...req.body })
     const token = user.createJWT()
-    
+
     res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
 }
 
@@ -44,8 +45,14 @@ const login = async (req, res) => {
     res.status(200).json({ user: { name: user.name, college_name: user.college_name }, token })
 }
 
-const verifyToken = async (req, res) => {
-    res.status(200).json({ msg: 'Token is valid' })
+const logout = async (req, res) => {
+    const token = req.headers.authorization?.split(' ')[1]
+    await addToBlacklist(token)
+    res.status(StatusCodes.OK).json({ message: 'Logged out successfully' })
 }
 
-module.exports = { register, login, verifyToken }
+const verifyToken = async (req, res) => {
+    res.status(StatusCodes.OK).json({ msg: 'Token is valid' })
+}
+
+module.exports = { register, login, logout, verifyToken }
