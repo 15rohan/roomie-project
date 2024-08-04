@@ -1,9 +1,9 @@
 import React from 'react'
 import { axiosInstance } from '../service/axios'
 import photo from '../images/hostel.jpg'
-// import Navbar from '../components/Navbar'
+import Navbar from '../components/Navbar'
 
-const Listings = () => {
+const Listings = (props) => {
 
     const [listings, setListings] = React.useState([])
 
@@ -30,15 +30,15 @@ const Listings = () => {
                     <div className='flex flex-col gap-5'>
                         <p className='text-3xl font-bold'>{item.room}</p>
                         <div className='flex gap-3 items-center justify-between'>
-                            <p className='text-xl font-semibold'>{item.college}</p>
-                            <p className='text-xl font-semibold'>{item.gender}</p>
-                            <p className='text-xl font-semibold'>6 AC</p>
+                            <p className='text-xl font-semibold'>{item.createdBy.college_name}</p>
+                            <p className='text-xl font-semibold'>{item.createdBy.gender}</p>
+                            <p className='text-xl font-semibold'>{item.accomodation}</p>
                         </div>
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit perferendis aliquam soluta dolore aut at quae, cumque dignissimos eos sapiente? Dicta molestiae doloremque itaque fugit tempore alias dolores ab excepturi.</p>
                     </div>
                 </div>
                 <div className='flex gap-5'>
-                    <p className='w-1/3 font-medium text-lg'>Name: Rohan Singhal</p>
+                    <p className='w-1/3 font-medium text-lg'>Name: {item.createdBy.name}</p>
                     <p className='font-medium text-lg'>Contact: {item.contact}</p>
                 </div>
 

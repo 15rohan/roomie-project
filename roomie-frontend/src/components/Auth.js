@@ -7,7 +7,7 @@ import { axiosInstance } from "../service/axios";
         return {status:result.status}
     } catch (error ) {
         return {status:error.response.status}
-        console.log(error)
+        // console.log(error)
     }
 }
 

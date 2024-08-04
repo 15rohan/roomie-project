@@ -2,7 +2,7 @@ import React from 'react'
 import { useFormik } from "formik";
 import * as yup from 'yup'
 import { axiosInstance } from '../service/axios'
-import { useNavigate } from 'react-router';
+import { useNavigate,redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import hostel from '../images/hostel.jpg'
 import Navbar from '../components/Navbar';
@@ -28,7 +28,7 @@ const Login = () => {
             console.log(result)
             if (result.statusText === 'OK') {
                 localStorage.setItem('token', result.data.token)
-                navigate('/')
+                redirect('/')
             }
         } catch (error) {
             console.log(error)
@@ -54,7 +54,6 @@ const Login = () => {
 
     return (
         <div className='bg-cover bg-no-repeat min-h-screen' style={{ backgroundImage: `url(${hostel})` }}>
-            <Navbar />
             <div className='flex flex-col justify-center min-h-[90vh]' >
                 {/* <div className='flex justify-center items-center'> */}
                     {!signUp ?
