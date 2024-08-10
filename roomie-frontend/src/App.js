@@ -8,6 +8,7 @@ import { axiosInstance } from './service/axios'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Preferences from './pages/Preferences';
 import Listings from './pages/Listings';
+import CreateListing from './pages/CreateListing';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<Home />} />
           <Route path='/listings' element={<Listings />} />
+          <Route path='/create' element={<CreateListing />} />
         </Route>
         <Route path='/preferences' element={<Preferences />} />
         <Route path='/login' element={<Login />} />

@@ -48,6 +48,7 @@ const LoginComponent = (props) => {
                     <form className='flex flex-col gap-8 items-center justify-center' onSubmit={handleSubmit}>
                         <input type="text" className='w-4/5 rounded-sm bg-slate-200' name='email' value={values.email} onChange={handleChange} placeholder='Enter Your Email' />
                         <input type="password" className='w-4/5 rounded-sm bg-slate-200' name='password' value={values.password} onChange={handleChange} placeholder='Enter Your Password' />
+                        {/* <input type="file" name="upload" id="upload" accept='image/png, image/jpeg'/> */}
                         <div className="submit">
                             <button type='submit'>Submit</button>
                             <div className='button-clear bg-[#8DD1E7]' onClick={resetForm}>Clear</div>

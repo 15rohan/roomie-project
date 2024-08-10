@@ -1,15 +1,33 @@
 import React from 'react'
-import { useFormik } from "formik";
+import { replace, useFormik } from "formik";
 import * as yup from 'yup'
 import { axiosInstance } from '../service/axios'
-import { useNavigate,redirect } from 'react-router';
+import { useNavigate, redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import hostel from '../images/hostel.jpg'
 import Navbar from '../components/Navbar';
 import RegisterOverlay from '../components/RegisterOverlay';
 import LoginComponent from '../components/LoginComponent';
+import Auth from '../components/Auth.js'
 
 const Login = () => {
+
+    const checkAuth = async () => {
+        try {
+            const status = await Auth()
+            // console.log(status)
+            if (status.status === 200) {
+                navigate('/')
+            } 
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    React.useEffect(() => {
+        checkAuth()
+    }, [])
+
     const navigate = useNavigate()
     const [signUp, setSignUp] = React.useState(false)
 
@@ -28,7 +46,7 @@ const Login = () => {
             console.log(result)
             if (result.statusText === 'OK') {
                 localStorage.setItem('token', result.data.token)
-                redirect('/')
+                navigate('/',true)
             }
         } catch (error) {
             console.log(error)
@@ -56,13 +74,13 @@ const Login = () => {
         <div className='bg-cover bg-no-repeat min-h-screen' style={{ backgroundImage: `url(${hostel})` }}>
             <div className='flex flex-col justify-center min-h-[90vh]' >
                 {/* <div className='flex justify-center items-center'> */}
-                    {!signUp ?
-                        <LoginComponent toggleSignUp={toggleSignUp} />
-                        :
-                        <RegisterOverlay toggleSignUp={toggleSignUp} />
-                    }
-                </div>
+                {!signUp ?
+                    <LoginComponent toggleSignUp={toggleSignUp} />
+                    :
+                    <RegisterOverlay toggleSignUp={toggleSignUp} />
+                }
             </div>
+        </div>
         // </div>
     )
 }
