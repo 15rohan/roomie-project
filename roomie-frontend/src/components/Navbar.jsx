@@ -15,11 +15,11 @@ const Navbar = (props) => {
     }
 
     return (
-        <nav className='w-full h-[8vh] flex items-center justify-between px-5'>
+        <nav className='w-full h-[8vh] flex items-center justify-between px-5 bg-black text-white'>
             <Link to='/'><div><p className='text-2xl font-bold cursor-pointer'>Roomie</p></div></Link>
             <div className='flex gap-6 items-center justify-center'>
-                <Link to='/'><li className='list-none cursor-pointer hover:text-slate-700 text-md'>Home</li></Link>
-                <li className='list-none cursor-pointer hover:text-slate-700 text-md' onClick={() => logout()}>Logout</li>
+                <Link to='/'><li className='list-none cursor-pointer hover:text-[#FFBF00] text-md'>Home</li></Link>
+                <li className='list-none cursor-pointer text-md hover:text-[#FFBF00]' onClick={() => logout()}>Logout</li>
             </div>
         </nav>
     )
