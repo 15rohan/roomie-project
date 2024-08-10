@@ -19,9 +19,9 @@ const createListing = async (req, res) => {
     const createdBy = req.user.userID
 
     let listing = await Listing.findOne({ createdBy })
-    if (listing) {
-        throw new BadRequestError('User already has an existing listing')
-    }
+    // if (listing) {
+    //     throw new BadRequestError('User already has an existing listing')
+    // }
 
     const user = await User.findOne({ _id: createdBy })
     if (!user) {
