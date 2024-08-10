@@ -2,8 +2,34 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import React from 'react'
 import { axiosInstance } from '../service/axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router';
 
 const ListingForm = () => {
+    const navigate = useNavigate()
+
+    const notify = () => toast.success("Listing Created Successfully", { position: "top-center", autoClose: 2000, pauseOnHover: false });
+
+    const create = async (data) => {
+        try {
+            const payload = {
+                room: data.room,
+                contact: data.contact,
+                accomodation: data.accomodation,
+                description: data.description
+            }
+            const result = await axiosInstance.post('api/v1/listings', payload)
+            console.log(result)
+            notify()
+            setTimeout(() => {
+                navigate('/listings')
+              }, "2500");
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <Formik
             initialValues={{ room: '', contact: '', accomodation: '', description: '' }}
@@ -22,7 +48,9 @@ const ListingForm = () => {
                 accomodation: Yup.string().oneOf(['4AC', '6AC', '4NAC', '6NAC'])
             })}
             onSubmit={(values, { setSubmitting, resetForm }) => {
-                console.log(values)
+                // console.log(values)
+                create(values)
+                // resetForm()
             }}
         >{(props) => (
             <Form className="flex flex-col px-5 w-11/12 bg-black text-white mx-auto rounded-sm py-10 gap-10">
@@ -52,12 +80,15 @@ const ListingForm = () => {
 
 const CreateListing = () => {
     return (
-        <div className="flex items-center justify-center min-h-[92vh]">
-            <div className="w-1/2 min-h-[92vh] p-5 flex items-center justify-center text-5xl font-semibold">Create Your Own Listing to Let People Know What You're Looking For</div>
-            <div className="w-1/2 min-h-[92vh]  flex items-center justify-center">
-                <ListingForm />
+        <>
+            <ToastContainer />
+            <div className="flex items-center justify-center min-h-[92vh]">
+                <div className="w-1/2 min-h-[92vh] p-5 flex items-center justify-center text-5xl font-semibold">Create Your Own Listing to Let People Know What You're Looking For</div>
+                <div className="w-1/2 min-h-[92vh]  flex items-center justify-center">
+                    <ListingForm />
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
