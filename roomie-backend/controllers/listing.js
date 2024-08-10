@@ -4,7 +4,13 @@ const { BadRequestError } = require('../errors')
 const { StatusCodes } = require('http-status-codes')
 
 const getAllListings = async (req, res) => {
-    const users = await User.find({college_name: req.query.college}, '_id')
+    let college_name = req.query.college
+    if(!college_name){
+        const user = await User.findOne({_id:req.user.userID})
+        college_name = user.college_name    
+    }
+    
+    const users = await User.find({college_name}, '_id')
     const userIds = users.map((user) => user.id)
 
     let listings = await Listing.find({createdBy: {$in:userIds}}).sort('createdAt').populate({

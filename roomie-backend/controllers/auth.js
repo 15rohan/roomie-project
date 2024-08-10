@@ -19,9 +19,7 @@ const register = async (req, res) => {
     req.body.preferences = preferenceDoc._id;
 
     const user = await User.create({ ...req.body })
-    const token = user.createJWT()
-
-    res.status(StatusCodes.CREATED).json({ user: { name: user.name }, token })
+    res.status(StatusCodes.CREATED).json({ message: 'User registered successfully', user: { name: user.name } })
 }
 
 const login = async (req, res) => {
