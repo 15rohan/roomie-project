@@ -1,10 +1,10 @@
-const {UnauthenticatedError} = require('../errors')
-const {isTokenBlacklisted} = require('../utils/blacklist')
+const { UnauthenticatedError } = require('../errors')
+const { isTokenBlacklisted } = require('../utils/blacklist')
 const jwt = require('jsonwebtoken')
 
-const auth = async (req,res,next) =>{
+const auth = async (req, res, next) => {
     const authHeader = req.headers.authorization
-    if(!authHeader || !authHeader.startsWith('Bearer ')){
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
         throw new UnauthenticatedError('Authentication Invalid')
     }
 
@@ -12,13 +12,12 @@ const auth = async (req,res,next) =>{
 
     try {
         const blacklisted = await isTokenBlacklisted(token)
-        if(blacklisted){
+        if (blacklisted) {
             throw new UnauthenticatedError('Authentication Invalid')
         }
 
-        const payload = jwt.verify(token,process.env.JWT_SECRET)
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
         req.user = { userID: payload.userID, name: payload.name, email: payload.email }
-
         next()
     } catch (error) {
         throw new UnauthenticatedError('Authentication Invalid')
