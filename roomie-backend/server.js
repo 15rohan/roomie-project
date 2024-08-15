@@ -35,7 +35,7 @@ app.use(xss())
 
 //routes
 app.use('/api/v1/auth',authRouter)
-app.use('/api/v1/listings',authMiddleware,listingRouter)
+app.use('/api/v1/listings',authMiddleware, listingRouter)
 
 app.use(notFoundMiddleware)
 app.use(errorHandlerMiddleware)

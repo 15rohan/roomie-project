@@ -22,6 +22,10 @@ const ListingSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true
+    },
+    image:{
+        type: String,
+        required: [true, 'Please provide an image']
     }
 }, { timestamps: true })
 
