@@ -4,5 +4,6 @@ const { createListing, getAllListings, deleteListing } = require('../controllers
 const upload = require('../middleware/multer')
 
 router.route('/').post(upload.single('image'),createListing).get(getAllListings)
+router.delete('/:id',deleteListing)
 
 module.exports = router
